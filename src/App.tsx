@@ -1,9 +1,5 @@
-import { Button } from "@/components/ui/button";
+import RootRoute from "./root-route";
 
 export default function App() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl">Openbird</h1>
-    </div>
-  );
+  return <RootRoute />;
 }
