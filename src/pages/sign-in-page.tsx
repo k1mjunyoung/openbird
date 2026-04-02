@@ -43,7 +43,7 @@ export default function SignInPage() {
         </Button>
       </div>
       <div>
-        <Link to={"/sign-in"} className="text-muted-foreground hover:underline">
+        <Link to={"/sign-up"} className="text-muted-foreground hover:underline">
           계정이 없다면? 회원가입
         </Link>
       </div>
