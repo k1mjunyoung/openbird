@@ -7,22 +7,28 @@ import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
 import ResetPasswordPage from "./pages/reset-password-page";
 import GlobalLayout from "./components/layout/global-layout";
+import GuestOnlyLayout from "./components/layout/guest-only-layout";
+import MemeberOnlyLayout from "./components/layout/memeber-only-layout";
 
 export default function RootRoute() {
   return (
-  <Routes>
-    <Route element={<GlobalLayout />} >
-      <Route path="/sign-in" element={<SignInPage /> } />
-      <Route path="/sign-up" element={<SignUpPage /> }/>
-      <Route path="/forget-password" element={<ForgetPasswordPage />} />
+    <Routes>
+      <Route element={<GlobalLayout />}>
+        <Route element={<GuestOnlyLayout />}>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        </Route>
 
-      <Route path="/" element={<IndexPage />} />
-      <Route path="/post/:postId" element={<PostDetailPage />} />
-      <Route path="/profile/:userId" element={<ProfileDetailPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route element={<MemeberOnlyLayout />}>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/post/:postId" element={<PostDetailPage />} />
+          <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+        </Route>
 
-      <Route path="*" element={<Navigate to={"/"} />} />
-    </Route>
-  </Routes>
+        <Route path="*" element={<Navigate to={"/"} />} />
+      </Route>
+    </Routes>
   );
 }
