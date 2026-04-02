@@ -37,8 +37,17 @@ export async function signInWithOAuth(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: "http://localhost:5173",
+      redirectTo: `${import.meta.env.VITE_PUBLIC_URL}`,
     },
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function requestPasswordResetEmail(email: string) {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${import.meta.env.VITE_PUBLIC_URL}/reset-password`,
   });
 
   if (error) throw error;
