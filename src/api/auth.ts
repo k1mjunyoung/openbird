@@ -29,7 +29,7 @@ export async function signInWithPassword({
     password,
   });
 
-  if (error) throw error;
+  if (error) throw error; // mutation에서 처리
   return data;
 }
 

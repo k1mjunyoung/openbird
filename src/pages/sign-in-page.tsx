@@ -5,13 +5,32 @@ import { useState } from "react";
 import { Link } from "react-router";
 import githubLogo from "@/assets/github-mark.svg";
 import { useSignInWithOAuth } from "@/hooks/muatations/use-sign-in-with-oauth";
+import { toast } from "sonner";
+import { generateErrorMessage } from "@/lib/error";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: signInWithPassword } = useSignInWithPassword();
-  const { mutate: signInWithOAuth } = useSignInWithOAuth();
+  const { mutate: signInWithPassword } = useSignInWithPassword({
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message, {
+        position: "top-center",
+      });
+
+      setPassword("");
+    },
+  });
+
+  const { mutate: signInWithOAuth } = useSignInWithOAuth({
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message, {
+        position: "top-center",
+      });
+    },
+  });
 
   const handleSignInWithPasswordClick = () => {
     if (email.trim() === "") return;
@@ -44,12 +63,15 @@ export default function SignInPage() {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Button onClick={handleSignInWithPasswordClick} className="w-full">
+        <Button
+          onClick={handleSignInWithPasswordClick}
+          className="w-full font-bold"
+        >
           로그인
         </Button>
         <Button
           onClick={handleSignInWithGithubClick}
-          className="w-full"
+          className="w-full font-bold"
           variant={"outline"}
         >
           <img src={githubLogo} alt="github logo" className="h-4 w-4" />
