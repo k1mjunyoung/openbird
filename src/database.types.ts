@@ -50,6 +50,49 @@ export type Database = {
       [_ in never]: never
     }
   }
+  public: {
+    Tables: {
+      profile: {
+        Row: {
+          bio: string
+          created_at: string
+          handle: string
+          id: string
+          nickname: string
+          profile_image_url: string | null
+        }
+        Insert: {
+          bio?: string
+          created_at?: string
+          handle?: string
+          id?: string
+          nickname?: string
+          profile_image_url?: string | null
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          handle?: string
+          id?: string
+          nickname?: string
+          profile_image_url?: string | null
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
 }
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
@@ -171,6 +214,9 @@ export type CompositeTypes<
 
 export const Constants = {
   openbird: {
+    Enums: {},
+  },
+  public: {
     Enums: {},
   },
 } as const
