@@ -1,8 +1,8 @@
 import { signInWithOAuth } from "@/api/auth";
-import type { useMutationCallbacks } from "@/types";
+import type { UseMutationCallback } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
-export function useSignInWithOAuth(callbacks?: useMutationCallbacks) {
+export function useSignInWithOAuth(callbacks?: UseMutationCallback) {
   return useMutation({
     mutationFn: signInWithOAuth,
     onError: (error) => {
